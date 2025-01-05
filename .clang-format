@@ -1,0 +1,8 @@
+---
+BasedOnStyle: Google
+IndentWidth: 4
+AlignAfterOpenBracket: BlockIndent
+BreakBeforeBraces: Allman
+SortIncludes: false
+ColumnLimit: 120
+---

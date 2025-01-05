@@ -1,0 +1,46 @@
+sampler fb : register(s0);
+sampler hud : register(s2);
+
+const float target_nits : register(c0);
+const float hud_nits : register(c1);
+const float scene_brightness : register(c2);
+
+struct PS_INPUT
+{
+    float2 uv : TEXCOORD0;
+};
+
+float3 aces_hdr(float3 x)
+{
+    float target_linear = target_nits * 0.0125;
+    float f = target_linear / 12.5;
+
+    float a = 15.8f;
+    float b = 2.12f;
+    float c = 1.2f;
+    float d = 5.92f;
+    float e = 1.9f;
+    return (x * (a * x + b)) / (x * (c * x + d) + e) * f;
+}
+
+float3 paint_hud(float3 col, float4 hud_col)
+{
+    float target_linear = hud_nits * 0.0125;
+    hud_col *= target_linear;
+    hud_col.a = saturate(hud_col.a);
+    
+    return col.rgb * (1.0 - hud_col.a) + hud_col.rgb * hud_col.a;
+}
+
+float4 main( PS_INPUT i ) : COLOR
+{
+    float3 col = tex2D(fb, i.uv).rgb;
+    float4 hud_col = tex2D(hud, i.uv);
+
+    col = pow(col, 1.05);
+    col *= scene_brightness;
+    col = aces_hdr(col);
+    col = paint_hud(col, hud_col);
+
+    return float4(col, 1);
+}

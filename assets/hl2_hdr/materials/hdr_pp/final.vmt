@@ -1,0 +1,6 @@
+"hdr_postprocess"
+{
+    "$hdrfbtexture" "_rt_HDRFB"
+    "$avglumatexture" "_rt_AvgLuma"
+    "$hudtexture" "_rt_HUD"
+}
