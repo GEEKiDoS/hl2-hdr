@@ -21,7 +21,7 @@ Extract to Half-Life 2 Folder and run hl2-hdr.exe to start the game.
 I just forced swapchain and backbuffer format to ARGB16F and specify scRGB color space, the DXVK-HDR fork always freezes my games somehow so I modified it from master branch.
 
 ### License
-Some code was from Source SDK 2013, so they are [SOURCE 1 SDK LICENSE](./LICENSE_SOURCELICENSE)
+Some code was from Source SDK 2013, so they are [SOURCE 1 SDK LICENSE](./LICENSE_SOURCE)
 
 [MinHook License](https://github.com/TsudaKageyu/minhook/blob/master/LICENSE.txt)
 
